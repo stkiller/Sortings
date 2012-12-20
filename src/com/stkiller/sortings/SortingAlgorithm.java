@@ -21,7 +21,7 @@ public abstract class SortingAlgorithm {
 
     protected boolean isSmaller(final Comparable aLeft, final Comparable aRight) {
         comparations++;
-        return aLeft.compareTo(aRight) < 0;
+        return aLeft.compareTo(aRight) <= 0;
     }
 
 

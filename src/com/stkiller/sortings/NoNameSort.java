@@ -3,10 +3,10 @@ package com.stkiller.sortings;
 /**
  * @author apodoprigora (20/12/2012)
  */
-public class OldMethodSort extends SortingAlgorithm {
+public class NoNameSort extends SortingAlgorithm {
 
-    public OldMethodSort() {
-        super("Old Method Sort");
+    public NoNameSort() {
+        super("No Name Method Sort");
     }
 
 
@@ -18,7 +18,7 @@ public class OldMethodSort extends SortingAlgorithm {
         boolean swaped;
         do {
             swaped = false;
-            for (int i = 1; i < aArray.length; i++) {
+            for (int i = aArray.length-1; i>0; i--) {
                 if (isSmaller(aArray[i], aArray[i - 1])) {
                     exchange(aArray, i-1, i);
                     swaped = true;
