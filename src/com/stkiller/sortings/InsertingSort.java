@@ -6,7 +6,7 @@ package com.stkiller.sortings;
 public class InsertingSort extends SortingAlgorithm {
 
     public InsertingSort() {
-        super("Insertion Sort");
+        super("Insertion");
     }
 
 

@@ -9,8 +9,9 @@ import org.junit.Test;
 /**
  * @author apodoprigora (20/12/2012)
  */
-public class SelectionSortTest {
+public abstract class GenericSortTest {
 
+    public static final Comparable[] SORTED_ARRAY = new Comparable[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     protected SortingAlgorithm algorithm;
 
 
@@ -20,9 +21,7 @@ public class SelectionSortTest {
     }
 
 
-    protected void initSorter() {
-        algorithm = new SelectionSort();
-    }
+    protected abstract void initSorter();
 
 
     @Test
@@ -45,8 +44,13 @@ public class SelectionSortTest {
     public void sort_nonSortedShortReversed() {
         final Comparable[] test = new Comparable[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
         final Comparable[] result = algorithm.sort(test);
-        System.out.println("Reversed:\t\t" + algorithm);
-        assertArraysEquals(test, result, new Comparable[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+        print("Reversed");
+        assertArraysEquals(test, result, SORTED_ARRAY);
+    }
+
+
+    private void print(final String aArrayType) {
+        System.out.println(String.format("%-10s:%s",aArrayType,algorithm));
     }
 
 
@@ -54,17 +58,18 @@ public class SelectionSortTest {
     public void sort_nonSortedShortRandom() {
         final Comparable[] test = new Comparable[] { 3, 1, 2, 5, 4, 8, 6, 9, 10, 7 };
         final Comparable[] result = algorithm.sort(test);
-        System.out.println("Random:\t\t" + algorithm);
-        assertArraysEquals(test, result, new Comparable[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+        print("Random");
+        assertArraysEquals(test, result, SORTED_ARRAY);
     }
 
 
     @Test
     public void sort_AlreadySorted() {
-        final Comparable[] test = new Comparable[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        final Comparable[] test = SORTED_ARRAY;
         final Comparable[] result = algorithm.sort(test);
-        System.out.println("Sorted:\t\t" + algorithm+"\n");
-        assertArraysEquals(test, result, new Comparable[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+        print("Sorted");
+        System.out.println();
+        assertArraysEquals(test, result, SORTED_ARRAY);
     }
 
 

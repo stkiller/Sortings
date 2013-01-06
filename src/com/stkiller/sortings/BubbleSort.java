@@ -3,10 +3,10 @@ package com.stkiller.sortings;
 /**
  * @author apodoprigora (20/12/2012)
  */
-public class NoNameSort extends SortingAlgorithm {
+public class BubbleSort extends SortingAlgorithm {
 
-    public NoNameSort() {
-        super("No Name Method Sort");
+    public BubbleSort() {
+        super("Bubble");
     }
 
 

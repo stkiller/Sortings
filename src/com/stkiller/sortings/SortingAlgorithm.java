@@ -45,6 +45,6 @@ public abstract class SortingAlgorithm {
 
     @Override
     public String toString() {
-        return methodName + ", comparations : " + getComparations() + ", exchanges : " + getExchanges();
+        return String.format("%-10s comparisons : %-4d exchanges : %-4d", methodName,getComparations(),getExchanges());
     }
 }

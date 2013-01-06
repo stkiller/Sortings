@@ -6,7 +6,7 @@ package com.stkiller.sortings;
 public class ShellSort extends SortingAlgorithm {
 
     public ShellSort() {
-        super("Shell Sort");
+        super("Shell");
     }
 
 

@@ -3,10 +3,10 @@ package com.stkiller.sortings;
 /**
  * @author apodoprigora (20/12/2012)
  */
-public class OldMethodSortTest extends SelectionSortTest {
+public class SelectionNewSortTest extends GenericSortTest {
 
     @Override
     protected void initSorter() {
-        algorithm = new NoNameSort();
+        algorithm = new BubbleSort();
     }
 }

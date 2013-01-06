@@ -6,7 +6,7 @@ package com.stkiller.sortings;
 public class SelectionSort extends SortingAlgorithm {
 
     public SelectionSort() {
-        super("Selection Sort");
+        super("Selection");
     }
 
 
