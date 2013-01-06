@@ -1,9 +1,15 @@
 package com.stkiller.sortings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import junit.framework.Assert;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -11,12 +17,27 @@ import org.junit.Test;
  */
 public abstract class GenericSortTest {
 
-    public static final Comparable[] SORTED_ARRAY = new Comparable[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    public static final int ARRAY_SIZE = 10;
+    public static final Comparable[] SORTED_ARRAY = new Comparable[ARRAY_SIZE];
+    public static final Comparable[] REVERSED_ARRAY = new Comparable[ARRAY_SIZE];
+    public static Comparable[] RANDOM_ARRAY = new Comparable[ARRAY_SIZE];
     protected SortingAlgorithm algorithm;
 
 
+    @BeforeClass
+    public static void initArrays() {
+        for (int i = 0; i < ARRAY_SIZE; i++) {
+            SORTED_ARRAY[i] = i;
+            REVERSED_ARRAY[ARRAY_SIZE - 1 - i] = i;
+        }
+        final List<Comparable> randomList = new ArrayList<Comparable>(Arrays.asList(SORTED_ARRAY));
+        Collections.shuffle(randomList);
+        RANDOM_ARRAY = randomList.toArray(new Comparable[ARRAY_SIZE]);
+    }
+
+
     @Before
-    public void beforeClass() {
+    public void setUp() {
         initSorter();
     }
 
@@ -26,7 +47,7 @@ public abstract class GenericSortTest {
 
     @Test
     public void sort_emptyArray() {
-        final Comparable[] result = algorithm.sort(new Integer[] {});
+        final Comparable[] result = algorithm.sort(new Integer[]{});
         assertArrayNotNull(result);
         assertArrayEmpty(result);
     }
@@ -41,42 +62,55 @@ public abstract class GenericSortTest {
 
 
     @Test
-    public void sort_nonSortedShortReversed() {
-        final Comparable[] test = new Comparable[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+    public void sort_nonSortedShortRandom() {
+        final Comparable[] test = createCopyArray(RANDOM_ARRAY);
+        final long start = System.nanoTime();
         final Comparable[] result = algorithm.sort(test);
-        print("Reversed");
+        final long end = System.nanoTime();
+        print("Random", end - start);
         assertArraysEquals(test, result, SORTED_ARRAY);
     }
 
 
-    private void print(final String aArrayType) {
-        System.out.println(String.format("%-10s:%s",aArrayType,algorithm));
-    }
-
-
     @Test
-    public void sort_nonSortedShortRandom() {
-        final Comparable[] test = new Comparable[] { 3, 1, 2, 5, 4, 8, 6, 9, 10, 7 };
+    public void sort_nonSortedShortReversed() {
+        final Comparable[] test = createCopyArray(REVERSED_ARRAY);
+        final long start = System.nanoTime();
         final Comparable[] result = algorithm.sort(test);
-        print("Random");
+        final long end = System.nanoTime();
+        print("Reversed", end - start);
         assertArraysEquals(test, result, SORTED_ARRAY);
     }
 
 
     @Test
     public void sort_AlreadySorted() {
-        final Comparable[] test = SORTED_ARRAY;
+        final Comparable[] test = createCopyArray(SORTED_ARRAY);
+        final long start = System.nanoTime();
         final Comparable[] result = algorithm.sort(test);
-        print("Sorted");
+        final long end = System.nanoTime();
+        print("Sorted", end - start);
         System.out.println();
         assertArraysEquals(test, result, SORTED_ARRAY);
     }
 
 
-    private void assertArraysEquals(final Comparable[] aTest, final Comparable[] aResult, final Comparable[] aExpecteds) {
+    private Comparable[] createCopyArray(final Comparable[] aArray) {
+        final Comparable[] test = new Comparable[aArray.length];
+        System.arraycopy(aArray, 0, test, 0, test.length);
+        return test;
+    }
+
+
+    private void print(final String aArrayType, final long aElapsedTime) {
+        System.out.println(String.format("(%-10d)%-10s:%s", aElapsedTime, aArrayType, algorithm));
+    }
+
+
+    private void assertArraysEquals(final Comparable[] aTest, final Comparable[] aResult, final Comparable[] aExpected) {
         assertArrayNotNull(aResult);
         assertEquals(aTest.length, aResult.length);
-        assertArrayEquals(aExpecteds, aResult);
+        assertArrayEquals(aExpected, aResult);
     }
 
 

@@ -16,7 +16,10 @@ public class InsertingSort extends SortingAlgorithm {
             return new Comparable[]{};
         }
         for (int i = 0; i < aArray.length; i++) {
-            for (int j = i; j > 0 && isSmaller(aArray[j], aArray[j - 1]); j--) {
+            for (int j = i; j > 0; j--) {
+                if (!isSmaller(aArray[j], aArray[j - 1])) {
+                    break;
+                }
                 exchange(aArray, j - 1, j);
             }
         }

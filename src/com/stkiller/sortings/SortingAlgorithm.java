@@ -5,14 +5,14 @@ package com.stkiller.sortings;
  */
 public abstract class SortingAlgorithm {
 
-    private int comparations;
+    private int comparisons;
     private int exchanges;
-    private String methodName;
+    private final String methodName;
 
 
     protected SortingAlgorithm(final String aMethodName) {
         methodName = aMethodName;
-        comparations = 0;
+        comparisons = 0;
         exchanges = 0;
     }
 
@@ -20,21 +20,26 @@ public abstract class SortingAlgorithm {
     public abstract Comparable[] sort(Comparable[] a);
 
     protected boolean isSmaller(final Comparable aLeft, final Comparable aRight) {
-        comparations++;
+        comparisons++;
         return aLeft.compareTo(aRight) <= 0;
     }
 
 
     protected void exchange(final Comparable[] aArray, final int aTo, final int aFrom) {
-        exchanges++;
+        incrementExchanges();
         final Comparable t = aArray[aTo];
         aArray[aTo] = aArray[aFrom];
         aArray[aFrom] = t;
     }
 
 
-    public int getComparations() {
-        return comparations;
+    protected void incrementExchanges() {
+        exchanges++;
+    }
+
+
+    public int getComparisons() {
+        return comparisons;
     }
 
 
@@ -45,6 +50,6 @@ public abstract class SortingAlgorithm {
 
     @Override
     public String toString() {
-        return String.format("%-10s comparisons : %-4d exchanges : %-4d", methodName,getComparations(),getExchanges());
+        return String.format("%-10s comparisons : %-4d exchanges : %-4d", methodName, getComparisons(),getExchanges());
     }
 }
