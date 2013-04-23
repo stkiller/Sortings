@@ -1,4 +1,6 @@
-package com.stkiller.sortings;
+package com.stkiller.sortings.implementation;
+
+import com.stkiller.sortings.SortingAlgorithm;
 
 /**
  * @author apodoprigora (20/12/2012)

@@ -1,4 +1,4 @@
-package com.stkiller.sortings;
+package com.stkiller.sortings.util;
 
 /**
  * @author apodoprigora (20/12/2012)

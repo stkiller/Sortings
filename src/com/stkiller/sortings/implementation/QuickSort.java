@@ -1,7 +1,9 @@
-package com.stkiller.sortings;
+package com.stkiller.sortings.implementation;
 
 import java.util.Arrays;
 import java.util.Collections;
+
+import com.stkiller.sortings.SortingAlgorithm;
 
 /**
  * @author andrei (06/01/2013)
